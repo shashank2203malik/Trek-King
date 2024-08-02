@@ -1,0 +1,47 @@
+<% layout('layouts/boilerplate') %>
+
+    <div id="cluster-map"></div>
+    <h1>All Treks</h1>
+
+    <div>
+        <a href="/treks/create">Add a new trail</a>
+    </div>
+
+    <% for(let trek of treks) { %>
+        <div class="card mb-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <% if(trek.images.length) { %>
+                        <img class="img-fluid" src="<%= trek.images[0].resizeImage %>" alt="">
+                        <% } else { %>
+                            <img crossorigin="anonymous" class="img-fluid"
+                                src="https://res.cloudinary.com/dxr1r3wig/image/upload/v1721627247/shubham-dhage-WtolM5hsj14-unsplash_pa4jim.jpg"
+                                alt="">
+                            <% } %>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <%= trek.title %>
+                        </h4>
+                        <h6 class="card-subtitle mb-4 text-body-secondary">
+                            <small class="text-secondary">
+                                <%= trek.location %>
+                            </small>
+                        </h6>
+                        <p class="card-text">
+                            <%= trek.description %>
+                        </p>
+                        <a class="btn btn-info" href="/treks/<%= trek.id %>" class="card-link">More Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+            <script>
+                const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
+                const treks = { features: <%- JSON.stringify(treks) %>};
+            </script>
+
+            <script src="/javascript/clusterMap.js"></script>

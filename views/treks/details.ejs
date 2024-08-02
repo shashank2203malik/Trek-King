@@ -1,0 +1,142 @@
+<% layout('layouts/boilerplate') %>
+    <% block('head').append('<link rel="stylesheet" href="/css/stars.css" />') %>
+
+
+    <div class="row">
+        <div class="col-6">
+
+            <div id="trekCarousel" class="carousel slide">
+                <div class="carousel-inner">
+                    <% trek.images.forEach((img, i)=> { %>
+                        <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+                            <img src="<%= img.resizeImage %>" class="d-block w-100" alt="">
+                        </div>
+                        <% }) %>
+                </div>
+                <% if(trek.images.length> 1) { %>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#trekCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#trekCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    <% } %>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= trek.title %>
+                    </h5>
+                    <p class="card-text">
+                        <%= trek.description %>
+                    </p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-secondary">
+                        <%= trek.location %>
+                    </li>
+                    <li class="list-group-item">Rs<%= trek.price %>/head</li>
+                </ul>
+                <div class="card-body">
+                    <a class="card-link btn btn-primary" href="/treks">All Treks</a>
+                    <% if(trek.submittedBy.equals(loggedInUser)) { %>
+                        <a class="card-link btn btn-info" href="/treks/<%= trek.id %>/edit">Edit</a>
+                        <form class="d-inline" action="/treks/<%= trek.id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                        <% } %>
+                </div>
+                <div class="card-footer text-secondary">
+                    Submitted by : <b>
+                        <%= trek.submittedBy.username %>
+                    </b>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="mb-3" id="map"></div>
+            <h2 class="mb-3">Leave a Review</h2>
+            <% if(!loggedInUser) { %>
+                <p>Please <a class="btn btn-sm btn-info" href="/login">login</a> to leave a review.</p>
+                <% } %>
+                    <% if(loggedInUser) { %>
+                        <form action="/treks/<%= trek.id %>/reviews" class="mb-3 validated-form" method="POST"
+                            novalidate>
+                            <div class="mb-2">
+                                <!-- <label class="form-label" for="rating">Rating</label>
+                                <input class="form-range" type="range" min="0" max="5" name="review[rating]"
+                                    id="rating"> -->
+
+                                <fieldset class="starability-basic">
+                                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]"
+                                        value="1" checked aria-label="No rating." />
+                                    <input type="radio" id="second-rate1" name="review[rating]" value="1" />
+                                    <label for="second-rate1" title="Terrible">1 star</label>
+                                    <input type="radio" id="second-rate2" name="review[rating]" value="2" />
+                                    <label for="second-rate2" title="Not good">2 stars</label>
+                                    <input type="radio" id="second-rate3" name="review[rating]" value="3" />
+                                    <label for="second-rate3" title="Average">3 stars</label>
+                                    <input type="radio" id="second-rate4" name="review[rating]" value="4" />
+                                    <label for="second-rate4" title="Very good">4 stars</label>
+                                    <input type="radio" id="second-rate5" name="review[rating]" value="5" />
+                                    <label for="second-rate5" title="Amazing">5 stars</label>
+                                </fieldset>
+
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="opinion">Review</label>
+                                <textarea class="form-control" name="review[opinion]" id="opinion" rows="4" cols="10"
+                                    required></textarea>
+                                <div class="invalid-feedback">
+                                    Please enter some sort of opinion.
+                                </div>
+                            </div>
+                            <button class="btn btn-success">Submit</button>
+                        </form>
+                        <% } %>
+
+                            <% for(let review of trek.reviews) { %>
+                                <div class="mb-3 card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            Rating:
+                                            <p class="starability-result" data-rating="<%= review.rating %>">
+                                                Rated: <%= review.rating %> stars
+                                            </p>
+                                        </h5>
+                                        <p class="card-text">
+                                            <b>Review:</b>
+                                            <%= review.opinion %>
+                                        </p>
+                                        <% if(review.submittedBy.equals(loggedInUser)) { %>
+                                            <a class="card-link btn btn-outline-info btn-sm"
+                                                href="/treks/<%= trek.id %>/reviews/<%= review.id %>/edit">Edit</a>
+                                            <form class="d-inline"
+                                                action="/treks/<%= trek.id %>/reviews/<%= review.id %>?_method=DELETE"
+                                                method="POST">
+                                                <button class="btn btn-outline-danger btn-sm">Delete</button>
+                                            </form>
+                                            <% } %>
+                                    </div>
+                                    <div class="card-footer text-secondary">
+                                        Submitted by : <b>
+                                            <%= review.submittedBy.username %>
+                                        </b>
+                                    </div>
+                                </div>
+                                <% } %>
+        </div>
+    </div>
+
+    <script>
+        const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
+        const trek = <%- JSON.stringify(trek) %>
+    </script>
+
+    <script src="/javascript/showPageMap.js"></script>

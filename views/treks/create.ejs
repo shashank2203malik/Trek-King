@@ -1,0 +1,70 @@
+<% layout('layouts/boilerplate') %>
+    <% block('head').append('<link rel="stylesheet" href="/css/images.css" />') %>
+
+
+    <div class="row">
+        <h1 class="text-center">New Trail</h1>
+        <div class="col-6 offset-3">
+            <form action="/treks" method="POST" class="validated-form" novalidate enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="trek[title]"
+                        placeholder="e.g. Kunjapuri Temple trek" required>
+                    <div class="valid-feedback">
+                        Good job!
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" class="form-control" id="location" name="trek[location]"
+                        placeholder="e.g. Rishikesh, Uttrakhand" required>
+                    <div class="valid-feedback">
+                        Good job!
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea type="text" class="form-control" id="description" name="trek[description]"
+                        required></textarea>
+                    <div class="valid-feedback">
+                        Good job!
+                    </div>
+                </div>
+
+                <div>
+                    <label for="price" class="form-label">Price</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="price-label">Rs</span>
+                        <input type="text" pattern="\d+|\d+.\d{2}" class="form-control" id="price" placeholder="0.00"
+                            aria-label="price" aria-describedby="price-label" name="trek[price]" required>
+                        <div class="invalid-feedback">
+                            Price should be a number greater than 0
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="image">Upload Images</label>
+                    <input type="file" class="form-control" id="image" name="image" multiple
+                        onchange="previewMultiple(event)">
+                </div>
+                <div id="formFile" class="mb-1"></div>
+
+                <!-- <input type="file" name="image" id="" multiple> -->
+
+                <!-- <div class="mb-3">
+                    <label for="image" class="form-label">Image URL</label>
+                    <input type="url" class="form-control" id="image" name="trek[image]" required>
+                    <div class="invalid-feedback">
+                        Please enter a URL
+                    </div> -->
+                <!-- </div> -->
+
+                <button class="btn btn-success">Add Trail</button>
+            </form>
+            <a class="btn btn-danger mt-3" href="/treks">Cancel</a>
+        </div>
+    </div>
