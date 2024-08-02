@@ -51,7 +51,7 @@ app.use(mongoSanitize());
 
 //CREATING MONGO SESSION STORE
 const store = MongoStore.create({
-	mongoUrl: 'mongodb://127.0.0.1:27017/TrekkingDB',
+	mongoUrl: dbUrl,
 	touchAfter: 24 * 60 * 60,
 	crypto: {
 		secret: process.env.MONGO_SECRET
