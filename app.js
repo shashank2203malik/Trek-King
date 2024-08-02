@@ -173,6 +173,7 @@ app.use((err, req, res, next) => {
     res.status(status).render('error', { err });
 });
 
-app.listen('8080');//, function () {
+const port = process.env.PORT || 3001;
+app.listen(port);//, function () {
 //console.log('Server open at : http://localhost:8080');
 //});
