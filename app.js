@@ -23,7 +23,7 @@ const reviewRoutes = require('./routes/reviews.js');
 const authRoutes = require('./routes/auth.js')
 const User = require('./models/user.js');
 
-const dbUrl = process.env.DB_URL;
+const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/TrekkingDB';
 (async function () {
     try {
         // 'mongodb://127.0.0.1:27017/TrekkingDB'

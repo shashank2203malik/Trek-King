@@ -15,7 +15,6 @@ module.exports.newTrekForm = function (req, res) {
 module.exports.createNewTrek = async function (req, res) {
     const geoData = await maptilerClient.geocoding.forward(req.body.trek.location, { limit: 1 });
     const trek = new Trek(req.body.trek);
-    console.log(geoData);
     if (geoData.features.length === 0) {
         console.log(geoData);
         trek.geometry = {
