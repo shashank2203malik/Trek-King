@@ -2,7 +2,6 @@ if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
 
-// 4lBo6XcBrQdbW87f
 
 const express = require('express');
 const app = express();
@@ -24,11 +23,11 @@ const reviewRoutes = require('./routes/reviews.js');
 const authRoutes = require('./routes/auth.js')
 const User = require('./models/user.js');
 
-
+const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/TrekkingDB';
 (async function () {
     try {
         // 'mongodb://127.0.0.1:27017/TrekkingDB'
-        await mongoose.connect('mongodb://127.0.0.1:27017/TrekkingDB');
+        await mongoose.connect(dbUrl);
         console.log("MongoDB Connection Open");
     }
     catch (err) {
