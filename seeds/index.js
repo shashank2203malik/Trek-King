@@ -5,9 +5,10 @@ const { places, description } = require('./seedHelpers');
 const axios = require('axios');
 
 
+// const dbUrl = process.env.DB_URL;
 (async function () {
 	try {
-		await mongoose.connect('mongodb://127.0.0.1:27017/TrekkingDB');
+		await mongoose.connect("mongodb+srv://shashankmalik2203:4lBo6XcBrQdbW87f@freecluster.rzy2jau.mongodb.net/?retryWrites=true&w=majority&appName=FreeCluster");
 		console.log("MongoDB Connection Open");
 	}
 	catch (err) {
@@ -42,7 +43,7 @@ const seedDB = async function () {
 		const price = Math.floor(Math.random() * 5000) + 5000;
 		const trek = new Trek({
 			// MY USER ID(THIS WILL BE AN ERROR IS USER COLLECTION IS ALSO DELETED)
-			submittedBy: '668abab42157e6db37551023',
+			submittedBy: '66abb954dd06e6d7eabc9f3c',
 			location: `${cities[randomCity].name}, ${cities[randomCity].stateCode}`,
 			geometry: {
 				type: 'Point',
