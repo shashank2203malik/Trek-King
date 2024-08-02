@@ -20,10 +20,11 @@ const helmet = require('helmet');
 
 const trekRoutes = require('./routes/treks.js');
 const reviewRoutes = require('./routes/reviews.js');
-const authRoutes = require('./routes/auth.js')
+const authRoutes = require('./routes/auth.js');
 const User = require('./models/user.js');
 
-const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/TrekkingDB';
+//const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/TrekkingDB';
+const dbUrl = "mongodb+srv://shashankmalik2203:4lBo6XcBrQdbW87f@freecluster.rzy2jau.mongodb.net/?retryWrites=true&w=majority&appName=FreeCluster";
 (async function () {
     try {
         // 'mongodb://127.0.0.1:27017/TrekkingDB'
@@ -145,7 +146,7 @@ app.use(function (req, res, next) {
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
-})
+});
 
 
 app.get('/', function (req, res) {
@@ -162,7 +163,7 @@ app.use('/', authRoutes);
 
 app.all('*', function (req, res, next) {
     next(new ExpressError(404, 'Page Not Found'));
-})
+});
 
 app.use((err, req, res, next) => {
     const { status = 500 } = err;
@@ -170,8 +171,8 @@ app.use((err, req, res, next) => {
         err.message = 'Something Went Wrong';
     }
     res.status(status).render('error', { err });
-})
+});
 
-app.listen('8080')//, function () {
+app.listen('8080');//, function () {
 //console.log('Server open at : http://localhost:8080');
 //});
