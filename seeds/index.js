@@ -8,7 +8,7 @@ const axios = require('axios');
 // const dbUrl = process.env.DB_URL;
 (async function () {
 	try {
-		await mongoose.connect("mongodb+srv://shashankmalik2203:4lBo6XcBrQdbW87f@freecluster.rzy2jau.mongodb.net/?retryWrites=true&w=majority&appName=FreeCluster");
+		await mongoose.connect('mongodb://127.0.0.1:27017/TrekkingDB');
 		console.log("MongoDB Connection Open");
 	}
 	catch (err) {
