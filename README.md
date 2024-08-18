@@ -11,8 +11,7 @@ My first full-stack web application. Essentially, it is a review website for Tre
 
 ## Demo
 
-##### Landing/Home page
-##### Using cluster map to pinpoint a particular trek and view detailed data of that trek
+##### Landing/Home page and using cluster map to pinpoint a particular trek and view detailed data of that trek
 ![landing page](https://github.com/user-attachments/assets/04e7af55-c8aa-47a0-9899-ae093cc406e0)
 ##### User authentication via login page to create or comment on a trek
 ![login](https://github.com/user-attachments/assets/b5adbc81-76c7-455f-b071-8911271bc781)
