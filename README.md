@@ -11,6 +11,8 @@ My first full-stack web application. Essentially, it is a review website for Tre
 
 ## Demo
 
+![review](https://github.com/user-attachments/assets/a46ff4c0-55ba-4741-874e-5f2d4114a929)
+
 ## Learnings
 
 - First full-stack application to help me understand the integration of front-end with back-end
