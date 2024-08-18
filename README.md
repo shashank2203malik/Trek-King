@@ -12,6 +12,8 @@ My first full-stack web application. Essentially, it is a review website for Tre
 ## Demo
 
 ![review](https://github.com/user-attachments/assets/a46ff4c0-55ba-4741-874e-5f2d4114a929)
+![deleting images](https://github.com/user-attachments/assets/9604ee30-e20a-4caa-992a-8791fba7955a)
+![Authorization](https://github.com/user-attachments/assets/3905fdc3-d245-46d3-a03c-d1b978c510ba)
 
 ## Learnings
 
